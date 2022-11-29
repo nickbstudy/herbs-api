@@ -42,4 +42,23 @@ const discardHerb = async (req, res) => {
 
 }
 
-module.exports = { getHerbs, addHerb, discardHerb }
+//PATCH - update herb amount
+const changeAmount = async (req, res) => {
+    const { id } = req.params
+    const { newAmount } = req.body
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such herb'})
+    }
+
+    const updatedHerb = await Herb.findOneAndUpdate({_id: id}, {amount: newAmount})
+
+    if (!updatedHerb) {
+        return res.status(404).json({error: 'No such herb'})
+    }
+
+    res.status(200).json(updatedHerb)
+
+}
+
+module.exports = { getHerbs, addHerb, discardHerb, changeAmount }

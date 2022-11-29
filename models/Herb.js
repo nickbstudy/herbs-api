@@ -9,6 +9,11 @@ const herbSchema = new Schema({
     expiry: {
         type: Date,
         required: true
+    },
+    amount: {
+        type: Number,
+        required: true,
+        default: 100
     }
 })
 
