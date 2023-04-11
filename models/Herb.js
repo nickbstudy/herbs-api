@@ -1,14 +1,18 @@
 const mongoose = require('mongoose')
-const { Schema } = mongoose;
 
-const herbSchema = new Schema({
+const herbSchema = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
     name: {
         type: String,
-        required: true
+        required: [true, 'Please enter a name for the herb']
     },
     expiry: {
         type: Date,
-        required: true
+        required: [true, 'Please enter an expiry date']
     },
     amount: {
         type: Number,

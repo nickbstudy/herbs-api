@@ -1,14 +1,15 @@
 const express = require('express')
 const { getHerbs, addHerb, discardHerb, changeAmount } = require('../controllers/herbController')
+const {protect} = require('../middleware/authMiddleware')
 
 const router = express.Router()
 
-router.get('/', getHerbs)
+router.get('/', protect, getHerbs)
 
-router.post('/', addHerb)
+router.post('/', protect, addHerb)
 
-router.delete('/:id', discardHerb)
+router.delete('/:id', protect, discardHerb)
 
-router.patch('/:id', changeAmount)
+router.patch('/:id', protect, changeAmount)
 
 module.exports = router
