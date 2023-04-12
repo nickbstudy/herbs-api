@@ -2,6 +2,7 @@ const { json } = require('express')
 const express = require('express')
 require('dotenv').config()
 const colors = require('colors')
+const cors = require('cors')
 const port = process.env.PORT || 5000
 const mongoose = require('mongoose')
 const { errorHandler } = require('./middleware/errorMiddleware')
@@ -11,6 +12,8 @@ const connectDB = require('./config/db')
 
 // start up express app
 const app = express()
+
+app.use(cors());
 
 // middleware
 // app.use(cors())
