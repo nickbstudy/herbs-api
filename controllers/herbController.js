@@ -37,16 +37,17 @@ const discardHerb = async (req, res) => {
         return res.status(404).json({error: 'No such herb'})
     }
 
-    const user = await User.findById(req.user.id)
+    // ---- Removing as the user is already passed in req -----
+    // const user = await User.findById(req.user.id)
 
     // Check for user
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
 
     // Check user is editing their own herbs only
-    if(herb.user.toString() !== user.id) {
+    if(herb.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -70,16 +71,17 @@ const changeAmount = async (req, res) => {
         return res.status(404).json({error: 'No such herb'})
     }
 
-    const user = await User.findById(req.user.id)
+    // ---- Removing as the user is already passed in req -----
+    // const user = await User.findById(req.user.id)
 
     // Check for user
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
 
     // Check user is editing their own herbs only
-    if(herb.user.toString() !== user.id) {
+    if(herb.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
